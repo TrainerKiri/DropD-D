@@ -1,3 +1,2 @@
-# DropD-D
-
+# Drop DnD
 bom é uma ferramenta que randomiza o loot que vai vir no d&D de acordo com a diculdade escolhida....
