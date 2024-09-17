@@ -20,8 +20,13 @@ body {
     }
 }
 
-footer{
-    justify-content: flex-end;
-    text-align: end;
+footer {
+    flex-shrink: 0;
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
     position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
 }
