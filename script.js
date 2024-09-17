@@ -1,16 +1,19 @@
-document.getElementById('formLoot').addEventListener('submit', function(event) {
-    event.preventDefault();
 
-    const nivel = parseInt(document.getElementById('nivel').value);
-    const dificuldade = document.getElementById('dificuldade').value;
-    const resultadoDado = rolarDado(dificuldade);
+    document.getElementById('formLoot').addEventListener('submit', function(event) {
+        event.preventDefault();  // Impede o envio do formulário
 
-    document.getElementById('resultadoDado').innerText = `Resultado do dado: ${resultadoDado}`;
+        const nivelElement = document.getElementById('nivel');
+        const nivel = parseInt(document.getElementById('nivel').value)
+        
+        const dificuldade = document.getElementById('dificuldade').value;
+        const resultadoDado = rolarDado(dificuldade);  // Rolar o dado automaticamente
+
+        document.getElementById('resultadoDado').innerText = `Resultado do dado: ${resultadoDado}`;
+        
+        const loot = calcularLoot(nivel, dificuldade, resultadoDado);
+        document.getElementById('resultadoLoot').innerText = loot;
+    });
     
-    const loot = calcularLoot(nivel, dificuldade, resultadoDado);
-    document.getElementById('resultadoLoot').innerText = loot;
-});
-
 function rolarDado(dificuldade) {
     let maxValor = 0;
     if (dificuldade === 'dificil') {
@@ -21,7 +24,7 @@ function rolarDado(dificuldade) {
         maxValor = 8;  // D8
     }
 
-    return Math.floor(Math.random() * maxValor) + 1;
+    return Math.floor(Math.random() * maxValor) + 1;  // Gera um número aleatório entre 1 e o máximo do dado
 }
 
 function calcularLoot(nivel, dificuldade, resultado) {
@@ -42,7 +45,7 @@ function calcularLoot(nivel, dificuldade, resultado) {
                 loot = 'Item Mágico';
                 break;
             default:
-                loot = 'Resultado inválido';
+                loot = 'Resultado inválido para a dificuldade difícil';
         }
     } else if (dificuldade === 'medio') {
         switch (resultado) {
@@ -65,7 +68,7 @@ function calcularLoot(nivel, dificuldade, resultado) {
                 loot = 'Item Mágico';
                 break;
             default:
-                loot = 'Resultado invalio';
+                loot = 'Resultado inválido para a dificuldade média';
         }
     } else if (dificuldade === 'facil') {
         switch (resultado) {
@@ -94,7 +97,7 @@ function calcularLoot(nivel, dificuldade, resultado) {
                 loot = 'Item Mágico';
                 break;
             default:
-                loot = 'Invalida';
+                loot = 'Resultado inválido para a dificuldade fácil';
         }
     } else {
         loot = 'Dificuldade desconhecida.';
