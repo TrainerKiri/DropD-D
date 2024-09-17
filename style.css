@@ -12,8 +12,11 @@ body {
     color: white;
 }
 
-
-
+@media (max-width: 768px) {
+    body {
+        background-image: url('background-celular.jpg');
+        background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
+    }
 
 footer {
     flex-shrink: 0;
