@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>DropDnD</title>
+    <title>Loot do Reit</title>
 </head>
-
 <body>
-    <h1>Drops D&D</h1>
-    <label for="Nível">Nível do jogador</label>
-    <input type="number" id="levelP" min="1" max="20" value="1">
-    <br>
-    <select id="Diff">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-    </select>
-<button onclick="random">Rolar</button>
-    <div class="dropbox">
+    <h1>Drop Loot D&D</h1>
+    
+    <form id="formLoot">
+        <label for="nivel">Nível do Jogador:</label>
+        <input type="number" id="nivel" name="nivel" min="1" required><br><br>
 
+        <label for="dificuldade">Dificuldade da Batalha:</label>
+        <select id="dificuldade" name="dificuldade" required>
+            <option value="dificil">Difícil (d4)</option>
+            <option value="medio">Médio (d6)</option>
+            <option value="facil">Fácil (d8)</option>
+        </select><br><br>
 
-    </div>
+        <button type="submit">Rolar Dado</button>
+    </form>
+
+    <p id="resultadoDado"></p>
+    <p id="resultadoLoot"></p>
+
     <script src="script.js"></script>
 </body>
-
 </html>

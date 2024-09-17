@@ -3,3 +3,11 @@
     justify-content: center;
     justify-items: center;
 }
+
+
+body {
+    background: url(img.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
