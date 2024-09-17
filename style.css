@@ -13,12 +13,7 @@ body {
 }
 
 
-@media (max-width: 768px) {
-    body {
-        background-image: url('img.jpg');
-        background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
-    }
-}
+
 
 footer {
     flex-shrink: 0;
