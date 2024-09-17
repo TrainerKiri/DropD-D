@@ -19,3 +19,9 @@ body {
         background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
     }
 }
+
+footer{
+    justify-content: flex-end;
+    text-align: end;
+    position: fixed;
+}
