@@ -1,152 +1,107 @@
-let atendimentos = {
-    realizados: new Set(),
-    agendados: new Set(),
-    cancelados: new Set()
-};
 
-function setCookie(name, value, days) {
-    const d = new Date();
-    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + d.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
+    document.getElementById('formLoot').addEventListener('submit', function(event) {
+        event.preventDefault();  // Impede o envio do formulário
 
-function getCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-}
+        const nivelElement = document.getElementById('nivel');
+        const nivel = parseInt(document.getElementById('nivel').value)
+        
+        const dificuldade = document.getElementById('dificuldade').value;
+        const resultadoDado = rolarDado(dificuldade);  // Rolar o dado automaticamente
 
-function salvarAtendimentos() {
-    setCookie('atendimentos', JSON.stringify(atendimentos), 7);
-}
-
-function carregarAtendimentos() {
-    const atendimentosCookie = getCookie('atendimentos');
-    if (atendimentosCookie) {
-        atendimentos = JSON.parse(atendimentosCookie);
-    }
-}
-
-function formatarLista(lista) {
-    return lista.map(protocolo => `• ${protocolo}`).join('<br>') || 'Nenhum';
-}
-
-function atualizarLista() {
-    const listaDiv = document.getElementById('listaAtendimentos');
-    const realizados = formatarLista(Array.from(atendimentos.realizados));
-    const agendados = formatarLista(Array.from(atendimentos.agendados));
-    const cancelados = formatarLista(Array.from(atendimentos.cancelados));
-
-    const realizadosSemAgendamento = formatarLista(Array.from(atendimentos.realizados).filter(protocolo => 
-        !atendimentos.agendados.has(protocolo)
-    ));
-
-    listaDiv.innerHTML = `
-        <h3>Atendimentos Realizados:</h3>${realizados}
-        <h3>Atendimentos Agendados:</h3>${agendados}
-        <h3>Atendimentos Cancelados:</h3>${cancelados}
-        <h3>Atendimentos Realizados sem Agendamento:</h3>${realizadosSemAgendamento}
-    `;
-}
-
-function adicionarAtendimento(tipo, protocolo) {
-    const protocolos = protocolo.split('/').map(p => p.trim());
-    protocolos.forEach(p => {
-        if (tipo === 'realizado') {
-            atendimentos.realizados.add(p);
-        } else if (tipo === 'agendado') {
-            atendimentos.agendados.add(p);
-        } else if (tipo === 'cancelado') {
-            atendimentos.cancelados.add(p);
-        }
+        document.getElementById('resultadoDado').innerText = `Resultado do dado: ${resultadoDado}`;
+        
+        const loot = calcularLoot(nivel, dificuldade, resultadoDado);
+        document.getElementById('resultadoLoot').innerText = loot;
     });
-    salvarAtendimentos();
-    atualizarLista();
+    
+function rolarDado(dificuldade) {
+    let maxValor = 0;
+    if (dificuldade === 'dificil') {
+        maxValor = 4;  // D4
+    } else if (dificuldade === 'medio') {
+        maxValor = 6;  // D6
+    } else if (dificuldade === 'facil') {
+        maxValor = 8;  // D8
+    }
+
+    return Math.floor(Math.random() * maxValor) + 1;  // Gera um número aleatório entre 1 e o máximo do dado
 }
 
-function mostrarNotificacao(mensagem) {
-    const notificacaoDiv = document.getElementById('notificacao');
-    notificacaoDiv.innerText = mensagem;
-    notificacaoDiv.style.opacity = '1';
-    setTimeout(() => {
-        notificacaoDiv.style.opacity = '0';
-    }, 3000);
+function calcularLoot(nivel, dificuldade, resultado) {
+    let loot = '';
+    
+    if (dificuldade === 'dificil') {
+        switch (resultado) {
+            case 1:
+                loot = nivel * 20 + ' ouro';
+                break;
+            case 2:
+                loot = nivel * 40 + ' ouro';
+                break;
+            case 3:
+                loot = 'Consumível Maior';
+                break;
+            case 4:
+                loot = 'Item Mágico';
+                break;
+            default:
+                loot = 'Resultado inválido para a dificuldade difícil';
+        }
+    } else if (dificuldade === 'medio') {
+        switch (resultado) {
+            case 1:
+                loot = nivel * 10 + ' ouro';
+                break;
+            case 2:
+                loot = nivel * 20 + ' ouro';
+                break;
+            case 3:
+                loot = nivel * 30 + ' ouro';
+                break;
+            case 4:
+                loot = 'Consumível Menor';
+                break;
+            case 5:
+                loot = 'Consumível Maior';
+                break;
+            case 6:
+                loot = 'Item Mágico';
+                break;
+            default:
+                loot = 'Resultado inválido para a dificuldade média';
+        }
+    } else if (dificuldade === 'facil') {
+        switch (resultado) {
+            case 1:
+                loot = nivel * 5 + ' ouro';
+                break;
+            case 2:
+                loot = nivel * 10 + ' ouro';
+                break;
+            case 3:
+                loot = nivel * 15 + ' ouro';
+                break;
+            case 4:
+                loot = nivel * 20 + ' ouro';
+                break;
+            case 5:
+                loot = 'Consumível Menor';
+                break;
+            case 6:
+                loot = 'Consumível Menor';
+                break;
+            case 7:
+                loot = 'Consumível Maior';
+                break;
+            case 8:
+                loot = 'Item Mágico';
+                break;
+            default:
+                loot = 'Resultado inválido para a dificuldade fácil';
+        }
+    } else {
+        loot = 'Dificuldade desconhecida.';
+    }
+
+    return loot;
 }
-
-function verificarCancelado(protocolo) {
-    let mensagens = [];
-    let status = [];
-    if (atendimentos.cancelados.has(protocolo)) {
-        status.push('cancelado');
-    }
-    if (atendimentos.realizados.has(protocolo)) {
-        status.push('realizado');
-    }
-    if (atendimentos.agendados.has(protocolo)) {
-        status.push('agendado');
-    }
-    if (status.length > 0) {
-        mensagens.push(`O atendimento com o protocolo ${protocolo} está ${status.join(' e ')}.`);
-    }
-    if (atendimentos.realizados.has(protocolo) && !atendimentos.agendados.has(protocolo)) {
-        mensagens.push(`O atendimento com o protocolo ${protocolo} foi realizado sem agendamento.`);
-    }
-    if (status.length === 0) {
-        mensagens.push(`O atendimento com o protocolo ${protocolo} não foi encontrado.`);
-    }
-    mostrarNotificacao(mensagens.join(' '));
-}
-
-document.getElementById('adicionarRealizado').addEventListener('click', () => {
-    const protocolo = document.getElementById('protocoloRealizado').value;
-    if (protocolo) {
-        adicionarAtendimento('realizado', protocolo);
-        mostrarNotificacao(`Atendimento realizado adicionado: ${protocolo}`);
-        document.getElementById('protocoloRealizado').value = '';
-    }
-});
-
-document.getElementById('adicionarAgendado').addEventListener('click', () => {
-    const protocolo = document.getElementById('protocoloAgendado').value;
-    if (protocolo) {
-        adicionarAtendimento('agendado', protocolo);
-        mostrarNotificacao(`Atendimento agendado adicionado: ${protocolo}`);
-        document.getElementById('protocoloAgendado').value = '';
-    }
-});
-
-document.getElementById('adicionarCancelado').addEventListener('click', () => {
-    const protocolo = document.getElementById('protocoloCancelado').value;
-    if (protocolo) {
-        adicionarAtendimento('cancelado', protocolo);
-        mostrarNotificacao(`Atendimento cancelado adicionado: ${protocolo}`);
-        document.getElementById('protocoloCancelado').value = '';
-    }
-});
-
-document.getElementById('verificar').addEventListener('click', () => {
-    const protocolo = document.getElementById('protocolo').value;
-    verificarCancelado(protocolo);
-});
-
-document.getElementById('limpar').addEventListener('click', () => {
-    atendimentos = {
-        realizados: new Set(),
-        agendados: new Set(),
-        cancelados: new Set()
-    };
-    salvarAtendimentos();
-    atualizarLista();
-    mostrarNotificacao('Todos os atendimentos foram limpos.');
-});
-
-document.getElementById('listar').addEventListener('click', atualizarLista);
-
-carregarAtendimentos();
-atualizarLista();

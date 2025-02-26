@@ -1,45 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Atendimentos IRED</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Loot do Reit</title>
 </head>
 <body>
-    <h1>Gerenciamento de Atendimentos <span class="neon">IRED</span></h1>
+    
+<div class="container"
+      ><h1>Drop Loot D&D</h1>
+    <form id="formLoot">
+        <label for="nivel">Nível do Jogador:</label>
+        <select id="nivel" name="nivel>
+       <option value="1">1</option>
+       <option value="2">2</option>
+       <option value="3">3</option>
+       <option value="4">4</option>
+       <option value="5">5</option>
+       <option value="6">6</option>
+       <option value="7">7</option>
+       <option value="8">8</option>
+       <option value="9">9</option>
+       <option value="10">10</option>
+       <option value="11">11</option>
+       <option value="12">12</option>
+       <option value="13">13</option>
+       <option value="14">14</option>
+       <option value="15">15</option>
+       <option value="16">16</option>
+       <option value="17">17</option>
+       <option value="18">18</option>
+       <option value="19">19</option>
+       <option value="20">20</option>
+        </select>
 
-    <div class="input-section">
-        <h2>Adicionar Atendimento Realizado</h2>
-        <input type="text" id="protocoloRealizado" placeholder="Digite o número do protocolo">
-        <button id="adicionarRealizado" class="button">Adicionar Realizado</button>
-    </div>
+        <label for="dificuldade">Dificuldade da Batalha:</label>
+        <select id="dificuldade" name="dificuldade" required>
+            <option value="dificil">Difícil (d4)</option>
+            <option value="medio">Médio (d6)</option>
+            <option value="facil">Fácil (d8)</option>
+        </select><br><br>
 
-    <div class="input-section">
-        <h2>Adicionar Atendimento Agendado</h2>
-        <input type="text" id="protocoloAgendado" placeholder="Digite o número do protocolo">
-        <button id="adicionarAgendado" class="button">Adicionar Agendado</button>
-    </div>
+        <button type="submit" id="rolando">Rolar Dado</button>
+    </form>
 
-    <div class="input-section">
-        <h2>Adicionar Atendimento Cancelado</h2>
-        <input type="text" id="protocoloCancelado" placeholder="Digite o número do protocolo">
-        <button id="adicionarCancelado" class="button">Adicionar Cancelado</button>
-    </div>
 
-    <div class="input-section">
-        <h2>Verificar Atendimento</h2>
-        <input type="text" id="protocolo" placeholder="Digite o número do protocolo">
-        <button id="verificar" class="button">Verificar</button>
-    </div>
 
-    <button id="limpar" class="button">Limpar Atendimentos</button>
-    <button id="listar" class="button">Listar Atendimentos</button>
+    <p id="resultadoDado"></p>
+    <p id="resultadoLoot"></p>
 
-    <div id="listaAtendimentos"></div>
-    <div id="notificacao" class="notificacao"></div>
+</div>
 
-    <footer id="marca">Direito e Propriedade Do Senhor Aluado</footer>
+<footer>Henriques2024</footer>
+
     <script src="script.js"></script>
 </body>
 </html>
