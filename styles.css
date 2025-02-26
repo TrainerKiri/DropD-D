@@ -1,0 +1,108 @@
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+    }
+    50% {
+        box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    }
+    100% {
+        box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+    }
+}
+
+@keyframes pulseHeader {
+    0% {
+        text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+    }
+    50% {
+        text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    }
+    100% {
+        text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+    }
+}
+.neon{
+color: red; 
+animation: pulseNeon 1.5s infinite; 
+text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red; 
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    color: white;
+}
+
+#listaAtendimentos {
+    max-height: 300px;
+    overflow-y: auto;
+    background: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    color: white;
+    border: 5px solid transparent; /* Para evitar que o conteúdo fique atrás da borda */
+    animation: pulse 1.5s infinite;
+}
+
+input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    background-color: transparent;
+    color: red;
+    border: 2px solid red;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.button:hover {
+    color: white;
+    background-color: red;
+    box-shadow: 0 0 20px red;
+}
+
+.notificacao {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(255, 2, 6, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+}
+
+#marca{
+    flex-shrink: 0;
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    color: white;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Atendimentos IRED</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Gerenciamento de Atendimentos <span class="neon">IRED</span></h1>
+
+    <div class="input-section">
+        <h2>Adicionar Atendimento Realizado</h2>
+        <input type="text" id="protocoloRealizado" placeholder="Digite o número do protocolo">
+        <button id="adicionarRealizado" class="button">Adicionar Realizado</button>
+    </div>
+
+    <div class="input-section">
+        <h2>Adicionar Atendimento Agendado</h2>
+        <input type="text" id="protocoloAgendado" placeholder="Digite o número do protocolo">
+        <button id="adicionarAgendado" class="button">Adicionar Agendado</button>
+    </div>
+
+    <div class="input-section">
+        <h2>Adicionar Atendimento Cancelado</h2>
+        <input type="text" id="protocoloCancelado" placeholder="Digite o número do protocolo">
+        <button id="adicionarCancelado" class="button">Adicionar Cancelado</button>
+    </div>
+
+    <div class="input-section">
+        <h2>Verificar Atendimento</h2>
+        <input type="text" id="protocolo" placeholder="Digite o número do protocolo">
+        <button id="verificar" class="button">Verificar</button>
+    </div>
+
+    <button id="limpar" class="button">Limpar Atendimentos</button>
+    <button id="listar" class="button">Listar Atendimentos</button>
+
+    <div id="listaAtendimentos"></div>
+    <div id="notificacao" class="notificacao"></div>
+
+    <footer id="marca">Direito e Propriedade Do Senhor Aluado</footer>
+    <script src="script.js"></script>
+</body>
+</html>
